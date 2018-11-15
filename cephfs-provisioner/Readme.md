@@ -1,1 +1,1 @@
-https://github.com/kubernetes-incubator/external-storage/tree/master/ceph/cephfs seems  required kernel 4.10+,it's too hign for centos7 , so this is an expirment solution for cephfs privisioner on centos7.5
+https://github.com/kubernetes-incubator/external-storage/tree/master/ceph/cephfs seems  required kernel 4.10+,it's too high for centos7 , so this is an expirment solution for cephfs privisioner on centos7.5
