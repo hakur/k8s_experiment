@@ -1,0 +1,30 @@
+workspace:
+  base: /go
+  path: src/drone-k8-deploy
+clone:
+  git:
+    image: plugins/git
+pipeline:
+  build:
+    image: registry.3dvisioncloud.com/library/golang:1.10.3-alpine3.8
+    commands:
+      - go build -ldflags "-s -w"
+  publish:
+    extra_hosts:
+    - "registry.3dvisioncloud.com:172.16.0.146"
+    image: plugins/docker
+    registry:  registry.3dvisioncloud.com
+    repo: registry.3dvisioncloud.com/library/drone-k8-deploy
+    username: admin
+    password: hermeshermes
+    tags: "latest"
+    #tags: "${DRONE_COMMIT_SHA:0:8}"
+    mirror: https://registry.docker-cn.com
+    privileged: true
+    compress: true
+    environment:
+      - PLUGIN_PULL_IMAGE=false
+      - PLUGIN_DAEMON_OFF=false
+      - PLUGIN_INSECURE=true
+branches:
+  - master
