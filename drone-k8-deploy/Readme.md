@@ -1,0 +1,1 @@
+I think automatically deploy to k8s when build is ok, it's useful when we are undering developing, tested on kubernetes 1.10

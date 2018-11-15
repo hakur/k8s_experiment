@@ -1,0 +1,11 @@
+{
+    "files.exclude":{
+        "LICENSE":true,
+        "README.md":true,
+        ".gitignore":true,
+        ".vscode":true,
+        "debug":true,
+        "debug.exe":true,
+        "main.exe":true,
+    }
+}

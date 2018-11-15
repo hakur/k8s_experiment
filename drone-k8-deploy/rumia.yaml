@@ -1,0 +1,56 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: rumia-dev
+  namespace: kube-ai-cloud
+spec:
+    selector:
+      matchLabels:
+        app: rumia-dev
+    template:
+      metadata:
+        labels:
+          app: rumia-dev
+      spec:
+        containers:
+          - name: rumia-dev
+            image: registry.3dvisioncloud.com/library/rumia:latest
+            imagePullPolicy: Always
+            resources:
+              requests:
+                cpu: 2
+                memory: 2Gi
+              limits:
+                cpu: 2
+                memory: 2Gi
+            ports:
+              - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rumia-dev
+  namespace: kube-ai-cloud
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+      name: http
+  selector:
+    app: rumia-dev
+    
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: rumia-dev
+  namespace: kube-ai-cloud
+spec:
+  rules:
+    - host: rumia.dev.aicloud.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: rumia-dev
+              servicePort: 80
